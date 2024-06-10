@@ -1,0 +1,80 @@
+---
+- name: Install Minecraft Server
+  hosts: minecraft_servers
+  become: yes
+  vars:
+    ansible_ssh_private_key_file: ~/minecraft-server-key
+  tasks:
+    # Update all installed packages to latest version
+    - name: Update packages
+      yum:
+        name: "*"
+        state: latest
+
+    # Install Java (This is the version required for the minecraft server being downloaded later)
+    - name: Install Java
+      yum:
+        name: java-21-amazon-corretto-headless
+        state: present
+
+    # Create a directory called minecraft_server where the server can be downloaded
+    - name: Create Minecraft server directory
+      file:
+        path: /home/ec2-user/minecraft_server
+        state: directory
+        owner: ec2-user
+        group: ec2-user
+
+    # download the .jar file from this url (used in project 1)
+    - name: Download Minecraft server
+      get_url:
+        url: https://piston-data.mojang.com/v1/objects/145ff0858209bcfc164859ba735d4199aafa1eea/server.jar
+        dest: /home/ec2-user/minecraft_server/server.jar
+        owner: ec2-user
+        group: ec2-user
+        mode: "0755" # owner can read, write, execute + group and others can read and execute
+
+    # accept the Minecraft EULA. create a eula.txt file and write eula=true to accept Minecraft License Agreement
+    - name: Accept Minecraft EULA
+      copy:
+        dest: /home/ec2-user/minecraft_server/eula.txt
+        content: "eula=true\n"
+        owner: ec2-user
+        group: ec2-user
+
+    # Like in part 1, this creates a Minecraft service file
+    - name: Create Minecraft service file
+      copy:
+        dest: /etc/systemd/system/minecraft.service
+        content: |
+          [Unit]
+          Description=Minecraft Server auto-start
+          Wants=network-online.target
+          After=network-online.target
+
+          [Service]
+          User=ec2-user
+          WorkingDirectory=/home/ec2-user/minecraft_server
+          ExecStart=/usr/bin/java -Xmx1024M -Xms1024M -jar server.jar nogui
+          ExecStop=/bin/kill -s SIGINT $MAINPID
+          Restart=on-failure
+          TimeoutStopSec=60
+          StandardInput=null
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: "0644"
+
+    - name: Reload systemd daemon
+      command: systemctl daemon-reload
+
+    - name: Enable Minecraft service
+      systemd:
+        name: minecraft
+        enabled: yes
+        state: started
+
+    - name: Start Minecraft service
+      systemd:
+        name: minecraft
+        state: started
