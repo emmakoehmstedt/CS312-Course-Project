@@ -103,18 +103,15 @@ Use the following command to connect to the Minecraft Server. Replace the public
 
 **Terraform**: To create the Terraform script, I referred to the steps I took in the Course Project Part 1 and used the Terraform docs to learn more about the init, plan, and apply commands. I also referred to a tutorial on LinkedIn that showed how to provision AWS EC2 instances with Terraform. I used ChatGPT to help me fix the syntax errors I was having.
 
-- [Terraform Docs] (https://developer.hashicorp.com/terraform/cli/commands/plan)
-- [LinkedIn Tutorial] (https://www.linkedin.com/pulse/how-provision-configure-aws-ec2-instance-using-terraform-%D0%B8%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2/)
-- ChatGPT
+-[Terraform Docs] (https://developer.hashicorp.com/terraform/cli/commands/plan) -[LinkedIn Tutorial] (https://www.linkedin.com/pulse/how-provision-configure-aws-ec2-instance-using-terraform-%D0%B8%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2/)
+-ChatGPT
 
 **.ini File**: To create the ini file, I used ChatGPT to help me understand what an .ini file is, why I needed to use it, and how I could format it for my project. I then used the Ansible Docs to help me understand which commands I should be using.
 
-- [Ansible Docs] (https://docs.ansible.com/ansible/latest/collections/ansible/builtin/ini_inventory.html)
-- ChatGPT
+-[Ansible Docs] (https://docs.ansible.com/ansible/latest/collections/ansible/builtin/ini_inventory.html)
+-ChatGPT
 
 **Ansible File**: To write this file, I compiled all of the steps that I used to download and configure the minecraft server in Part 1 of the project. I used ChatGPT to help with the yaml syntax and to help fill in parts that I might have missed in the script. To figure out how to gracefully stop the program, I used an article about termination signals in Linux and an article about systemd units by Digital Ocean. I also used ChatGPT to create the ExecStop and TimeoutStopSec commands. To figure out how to restart on failure, I used a tutorial by DigitalOcean.
 
-- [AWS Ansible Tutorial] (https://dev.to/mariehposa/how-to-deploy-an-application-to-aws-ec2-instance-using-terraform-and-ansible-3e78)
-- [Digital Ocean Article] (https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files)
-- [Digital Ocean Tutorial] (https://www.digitalocean.com/community/tutorials/how-to-configure-a-linux-service-to-start-automatically-after-a-crash-or-reboot-part-1-practical-examples)
-- ChatGPT
+-[AWS Ansible Tutorial] (https://dev.to/mariehposa/how-to-deploy-an-application-to-aws-ec2-instance-using-terraform-and-ansible-3e78) -[Digital Ocean Article] (https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files) -[Digital Ocean Tutorial] (https://www.digitalocean.com/community/tutorials/how-to-configure-a-linux-service-to-start-automatically-after-a-crash-or-reboot-part-1-practical-examples)
+-ChatGPT
