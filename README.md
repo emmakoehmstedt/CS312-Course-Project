@@ -109,7 +109,7 @@ Use the following command to connect to the Minecraft Server. Replace the public
 
 **.ini File**: To create the ini file, I used ChatGPT to help me understand what an .ini file is, why I needed to use it, and how I could format it for my project. I then used the Ansible Docs to help me understand which commands I should be using.
 
--[Ansible Docs](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/ini_inventory.html)
+- [Ansible Docs](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/ini_inventory.html)
 
 - ChatGPT
 
